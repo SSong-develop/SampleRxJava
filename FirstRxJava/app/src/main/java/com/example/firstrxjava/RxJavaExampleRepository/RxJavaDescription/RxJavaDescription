@@ -1,0 +1,47 @@
+<div>
+### Rxjava flow 
+1. Create an Observable -> 옵저버블 생성
+2. Apply an operator to the Observable -> 옵저버블에 연산자 적용
+3. Designate what thread to do the work on and thread to emit the results to
+4. Subscribe an Observer to the Observable and view the results
+</div>
+
+<div>
+### RxJava Method 역할
+subscribeOn() -> 데이터를 처리할 쓰레드를 설정
+observeOn() -> 데이터를 받은 쓰레드를 어디로 설정할 것인지
+subscribe() -> 다음에 해야할 작업을 알려줌
+</div>
+
+<div>
+    // RxJava 개념
+    // ** Disposable **
+    // when observer no longer needed?
+    // That's why the concept of disposables exists
+    // All observers implements the DisposableObserver
+
+    // ** Operator **
+    // Operator that transform items that are emitted by an Observable -> 옵저버블로 방출된 아이템을 변환시키는 작업을 하는게 operator
+</div>
+
+<div>
+        // Observable 객체를 만들 떄 제네릭이 list의 형태가 아닌 것을 명심
+</div>
+
+
+<div>
+simple App을 만들면서 알게된거 적는 란
+<리액티브 프로그래밍의 핵심>
+- 데이터의 강을 만드는 observable
+- 강에서 데이터를 하나씩 건지는 Subscriber 
+옵저버블은 데이터를 제공하는 생산자로 세가지 유형의 행동을 수행
+1. onNext - 새로운 데이터 전달
+2. onCompleted - 스트림 종료
+3. onError - 에러신호 전달
+
+데이터 가공 Map
+- map은 한 데이터를 다른 데이터로 바꾸는 operator 원본의 데이터는 변경하지 않고 새로운 스트림을 생성한다.
+
+Flowable 
+- Observable에서 데이터가 발행되는 속도가 구독자가 처리하는 속도보다 현저하게 빠른 경우 배압 이슈(backPressure, 기존 데이터 흐름이 느려 오버플로 나는 현상)에 대응하는 기능을 추가로 제공
+</div>
