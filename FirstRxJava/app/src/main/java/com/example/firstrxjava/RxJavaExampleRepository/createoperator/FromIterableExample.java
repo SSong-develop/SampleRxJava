@@ -4,6 +4,9 @@ import android.util.Log;
 
 import com.example.firstrxjava.RxJavaExampleRepository.model.Task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -11,20 +14,27 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class FromArrayExample {
+public class FromIterableExample {
+    // fromIterable
+    // this will take an iterable of objects as input and output an Observable
+    // it will not execute the method immediately. it will only execute the method once a subscriber has subscribed
+
+    // it will use , To emit an arbitrary number of items that are known upfront.
+    // Same as fromArray() operator but it's an iterable
+
+    // input : List<T> , ArrayList<T> , Set<T>
+    // output : Observable<T>
 
     public void test(){
-        Task[] list = new Task[5];
-        list[0] = new Task("Take out Trash",true , 3);
-        list[1] = new Task("Walk the dog",false,2);
-        list[2] = new Task("Make my bed",true,1);
-        list[3] = new Task("Unload the dishwasher",false,0);
-        list[4] = new Task("Make dinner",true,5);
+        List<Task> list = new ArrayList<Task>();
+        list.add(new Task("Take out Trash",true , 3));
+        list.add(new Task("Walk the dog",false,2));
+        list.add(new Task("Make my bed",true,1));
+        list.add(new Task("Unload the dishwasher",false,0));
+        list.add(new Task("Make dinner",true,5));
 
-        // FromArray operator는 배열을 input으로 받고 output를 Observable로 준다.
-        // 바로 메소드가 수행되지 않고, 메소드가 subscriber들이 subscribed했을 떄 수행된다.
         Observable<Task> taskObservable = Observable
-                .fromArray(list)
+                .fromIterable(list)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
 
@@ -36,7 +46,7 @@ public class FromArrayExample {
 
             @Override
             public void onNext(@NonNull Task task) {
-                Log.i("FromArrayExample",task.getDescription());
+                Log.d("hello",task.getDescription());
             }
 
             @Override
@@ -50,5 +60,4 @@ public class FromArrayExample {
             }
         });
     }
-
 }
